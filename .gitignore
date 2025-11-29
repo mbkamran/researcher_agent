@@ -13,6 +13,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Ignore notebooks
+*.ipynb
+
 #Ignore generated outputs
 outputs/
 *.lock

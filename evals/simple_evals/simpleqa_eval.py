@@ -9,7 +9,10 @@ import json
 import pandas
 import random
 from typing import Dict, List, Any
-from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from langchain_aws import ChatBedrockConverse
+
+load_dotenv()
 
 GRADER_TEMPLATE = """
 Your job is to look at a question, a gold target, and a predicted answer, and then assign a grade of either ["CORRECT", "INCORRECT", "NOT_ATTEMPTED"].

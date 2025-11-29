@@ -126,7 +126,8 @@ class Memory:
             case "bedrock":
                 from langchain_aws.embeddings import BedrockEmbeddings
 
-                _embeddings = BedrockEmbeddings(model_id=model, **embedding_kwargs)
+                region_name = "us-east-1"
+                _embeddings = BedrockEmbeddings(model_id=model, region_name=region_name, **embedding_kwargs)
             case "aimlapi":
                 from langchain_openai import OpenAIEmbeddings
 

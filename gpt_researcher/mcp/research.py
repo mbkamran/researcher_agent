@@ -50,12 +50,17 @@ class MCPResearchSkill:
         
         try:
             from ..llm_provider.generic.base import GenericLLMProvider
+            import os
             
             # Create LLM provider using the config
             provider_kwargs = {
                 'model': self.cfg.strategic_llm_model,
                 **self.cfg.llm_kwargs
             }
+            
+            # For Bedrock, add default region_name if not already set
+            if self.cfg.strategic_llm_provider == "bedrock" and "region_name" not in provider_kwargs:
+                provider_kwargs['region_name'] = os.environ.get("AWS_REGION", "us-east-1")
             
             llm_provider = GenericLLMProvider.from_provider(
                 self.cfg.strategic_llm_provider, 

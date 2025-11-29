@@ -7,13 +7,13 @@ load_dotenv()
 async def main():
 
     # Example usage of get_llm function
-    llm_provider = "openai"
-    model = "gpt-3.5-turbo" 
-    temperature = 0.7
+    llm_provider = "bedrock"
+    model = "anthropic.claude-3-haiku-20240307-v1:0"
+    region_name="us-east-1"
     max_tokens = 1000
 
-    llm = get_llm(llm_provider, model=model, temperature=temperature, max_tokens=max_tokens)
-    print(f"LLM Provider: {llm_provider}, Model: {model}, Temperature: {temperature}, Max Tokens: {max_tokens}")
+    llm = get_llm(llm_provider, model=model, region_name="us-east-1", max_tokens=max_tokens)
+    print(f"LLM Provider: {llm_provider}, Model: {model}, Region Name: {region_name}, Max Tokens: {max_tokens}")
     print('llm: ',llm)
     await test_llm(llm=llm)
 

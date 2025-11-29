@@ -55,12 +55,17 @@ async def create_chat_completion_with_tools(
     """
     try:
         from ..llm_provider.generic.base import GenericLLMProvider
+        import os
         
         # Create LLM provider using the config
         provider_kwargs = {
             'model': model,
             **(llm_kwargs or {})
         }
+        
+        # For Bedrock, add default region_name if not already set
+        if llm_provider == "bedrock" and "region_name" not in provider_kwargs:
+            provider_kwargs['region_name'] = os.environ.get("AWS_REGION", "us-east-1")
         
         llm_provider_instance = GenericLLMProvider.from_provider(
             llm_provider, 

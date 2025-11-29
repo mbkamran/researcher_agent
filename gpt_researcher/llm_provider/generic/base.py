@@ -9,6 +9,9 @@ from typing import Any
 from colorama import Fore, Style, init
 import os
 from enum import Enum
+from dotenv import load_dotenv
+
+load_dotenv()
 
 _SUPPORTED_PROVIDERS = {
     "openai",
@@ -168,12 +171,14 @@ class GenericLLMProvider:
             llm = ChatGroq(**kwargs)
         elif provider == "bedrock":
             _check_pkg("langchain_aws")
-            from langchain_aws import ChatBedrock
+            from langchain_aws import ChatBedrockConverse
 
             if "model" in kwargs or "model_name" in kwargs:
                 model_id = kwargs.pop("model", None) or kwargs.pop("model_name", None)
-                kwargs = {"model_id": model_id, "model_kwargs": kwargs}
-            llm = ChatBedrock(**kwargs)
+                region_name = kwargs.pop("region_name")
+                kwargs = {"model_id": model_id, "region_name": region_name, "model_kwargs": kwargs}
+            llm = ChatBedrockConverse(**kwargs)
+            
         elif provider == "dashscope":
             _check_pkg("langchain_openai")
             from langchain_openai import ChatOpenAI

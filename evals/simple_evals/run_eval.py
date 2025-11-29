@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from gpt_researcher.agent import GPTResearcher
 from gpt_researcher.utils.enum import ReportType, ReportSource, Tone
 from evals.simple_evals.simpleqa_eval import SimpleQAEval
-from langchain_openai import ChatOpenAI
+from langchain_aws import ChatBedrockConverse
 import json
 
 # Type variables for generic function
@@ -77,10 +77,10 @@ async def main(num_examples: int):
         
     try:
         # Initialize the evaluator with specified number of examples
-        grader_model = ChatOpenAI(
-            temperature=0, 
-            model_name="gpt-4-turbo",
-            openai_api_key=os.getenv("OPENAI_API_KEY")
+        grader_model = ChatBedrockConverse(
+            model_id="anthropic.claude-3-haiku-20240307-v1:0",
+            region_name="us-east-1",
+            max_tokens=4096,
         )
         evaluator = SimpleQAEval(grader_model=grader_model, num_examples=num_examples)
         

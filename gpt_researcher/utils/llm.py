@@ -77,6 +77,10 @@ async def create_chat_completion(
         if base_url:
             provider_kwargs['openai_api_base'] = base_url
 
+    # For Bedrock, add default region_name if not already set
+    if llm_provider == "bedrock" and "region_name" not in provider_kwargs:
+        provider_kwargs['region_name'] = os.environ.get("AWS_REGION", "us-east-1")
+
     provider = get_llm(llm_provider, **provider_kwargs)
     response = ""
     # create response
