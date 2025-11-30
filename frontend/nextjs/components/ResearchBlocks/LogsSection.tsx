@@ -21,19 +21,32 @@ const LogsSection = ({ logs }: OrderedLogsProps) => {
     if (logsContainerRef.current) {
       logsContainerRef.current.scrollTop = logsContainerRef.current.scrollHeight;
     }
-  }, [logs]); // Dependency on logs array ensures this runs when new logs are added
+  }, [logs]);
 
   return (
-    <div className="container h-auto w-full shrink-0 rounded-lg border border-solid border-gray-700/40 bg-black/30 backdrop-blur-md shadow-lg p-5 mt-5">
-      <div className="flex items-start gap-4 pb-3 lg:pb-3.5">
-        <img src="/img/chat-check.svg" alt="logs" width={24} height={24} />
-        <h3 className="text-base font-bold uppercase leading-[152.5%] text-white">
-          Agent Work
-        </h3>
+    <div className="w-full rounded-xl bg-surface/80 backdrop-blur-xl border border-border-light shadow-lg overflow-hidden flex flex-col h-[400px]">
+      {/* Terminal Header */}
+      <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+          </div>
+          <h3 className="text-xs font-mono uppercase tracking-widest text-text-muted ml-2">
+            Agent Terminal
+          </h3>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          <span className="text-[10px] font-mono text-green-500 uppercase">Live</span>
+        </div>
       </div>
-      <div 
+
+      {/* Logs Area */}
+      <div
         ref={logsContainerRef}
-        className="overflow-y-auto min-h-[200px] max-h-[500px] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300/10"
+        className="flex-1 overflow-y-auto p-4 space-y-3 font-mono text-sm custom-scrollbar bg-black/40"
       >
         <LogMessage logs={logs} />
       </div>

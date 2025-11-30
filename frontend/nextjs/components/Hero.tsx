@@ -43,14 +43,21 @@ const Hero: FC<THeroProps> = ({
         >
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200" />
-            <div className="relative bg-surface p-4 rounded-2xl border border-border-subtle shadow-glass">
-              <Image
-                src="/img/gptr-black-logo.png"
-                alt="Researcher Agent Logo"
-                width={80}
-                height={80}
-                className="w-20 h-20 opacity-90 invert"
-              />
+            <div className="w-24 h-24 rounded-2xl bg-surface/50 backdrop-blur-xl border border-border-light flex items-center justify-center mb-8 shadow-2xl shadow-primary/20 animate-float group">
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent-cyan rounded-xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-500"></div>
+                <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                  <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#6366F1" />
+                      <stop offset="100%" stopColor="#06B6D4" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M50 20 L80 35 L80 65 L50 80 L20 65 L20 35 Z" fill="none" stroke="url(#logoGradient)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse-slow" />
+                  <circle cx="50" cy="50" r="12" fill="url(#logoGradient)" className="animate-pulse" />
+                  <path d="M50 20 L50 35 M80 35 L65 42.5 M80 65 L65 57.5 M50 80 L50 65 M20 65 L35 57.5 M20 35 L35 42.5" stroke="url(#logoGradient)" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                </svg>
+              </div>
             </div>
           </div>
 

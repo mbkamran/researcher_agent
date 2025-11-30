@@ -340,6 +340,13 @@ export default function Home() {
     saveOrUpdateResearch();
   }, [showResult, loading, answer, question, orderedData, history, saveResearch, updateResearch, isInChatMode, currentResearchId, getResearchById]);
 
+  const [chatPromptValue, setChatPromptValue] = useState("");
+
+  const handleClickSuggestion = (value: string) => {
+    setPromptValue(value);
+    handleDisplayResult(value);
+  };
+
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden bg-background text-text-main font-sans">
       <ResearchSidebar
@@ -379,18 +386,35 @@ export default function Home() {
               className="h-full p-4 md:p-8 max-w-5xl mx-auto"
             >
               <ResearchContent
-                chatBoxSettings={chatBoxSettings}
-                setChatBoxSettings={setChatBoxSettings}
-                question={question}
+                showResult={showResult}
                 orderedData={orderedData}
-                loading={loading}
                 answer={answer}
-                setAnswer={setAnswer}
-                setLoading={setLoading}
-                setOrderedData={setOrderedData}
-                setShowHumanFeedback={setShowHumanFeedback}
-                setQuestionForHuman={setQuestionForHuman}
-                onChat={handleChat}
+                allLogs={orderedData.filter((data: any) => data.type === 'logs').map((data: any) => ({
+                  header: data.content,
+                  text: typeof data.output === 'string' ? data.output : JSON.stringify(data.output),
+                  key: Math.random().toString(),
+                  metadata: data.metadata
+                }))}
+                chatBoxSettings={chatBoxSettings}
+                loading={loading}
+                isInChatMode={isInChatMode}
+                isStopped={false}
+                promptValue={promptValue}
+                chatPromptValue={chatPromptValue}
+                setPromptValue={setPromptValue}
+                setChatPromptValue={setChatPromptValue}
+                handleDisplayResult={handleDisplayResult}
+                handleChat={handleChat}
+                handleClickSuggestion={handleClickSuggestion}
+                currentResearchId={currentResearchId || undefined}
+                onShareClick={() => {
+                  if (answer) {
+                    navigator.clipboard.writeText(answer);
+                    toast.success("Report copied to clipboard");
+                  }
+                }}
+                reset={reset}
+                isProcessingChat={loading && isInChatMode}
               />
             </motion.div>
           )}

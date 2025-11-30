@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from 'react';
 import SourceCard from "./elements/SourceCard";
 
@@ -12,7 +11,7 @@ export default function Sources({
   if (compact) {
     // Compact version for chat responses
     return (
-      <div className="max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300/10">
+      <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
         <div className="flex w-full flex-wrap content-center items-center gap-2">
           {sources.map((source) => {
             // Extract domain from URL
@@ -23,14 +22,14 @@ export default function Sources({
             } catch (e) {
               // If URL parsing fails, use the original URL
             }
-            
+
             return (
-              <a 
-                key={source.url} 
-                href={source.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center gap-1.5 px-2 py-1 text-xs bg-gray-800/60 text-gray-300 hover:text-teal-300 hover:bg-gray-800/90 rounded border border-gray-700/40 transition-colors"
+              <a
+                key={source.url}
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2 py-1 text-xs bg-surface/60 text-text-muted hover:text-primary hover:bg-surface/90 rounded border border-border-subtle hover:border-primary/30 transition-all duration-200"
                 title={source.name}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -49,28 +48,29 @@ export default function Sources({
 
   // Full version for research results
   return (
-    <div className="container h-auto w-full shrink-0 rounded-lg border border-solid border-gray-700/40 bg-black/30 backdrop-blur-md shadow-lg p-5">
-      <div className="flex items-start gap-4 pb-3 lg:pb-3.5">
-        <img src="/img/browser.svg" alt="sources" width={24} height={24} />
-        <h3 className="text-base font-bold uppercase leading-[152.5%] text-white">
-          {sources.length} Sources{" "}
+    <div className="w-full p-6 rounded-xl bg-surface/50 backdrop-blur-md border border-border-subtle/50">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 rounded-lg bg-accent-purple/10 text-accent-purple">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-bold uppercase tracking-wider text-text-main">
+          {sources.length} Sources Analyzed
         </h3>
       </div>
-      <div className="overflow-y-auto max-h-[250px] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300/10">
-        <div className="flex w-full max-w-[890px] flex-wrap content-center items-center gap-[15px] pb-2">
+
+      <div className="overflow-y-auto max-h-[300px] custom-scrollbar pr-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {sources.length > 0 ? (
             sources.map((source) => (
               <SourceCard source={source} key={source.url} />
             ))
           ) : (
-            <>
-              <div className="h-20 w-[260px] max-w-sm animate-pulse rounded-md bg-gray-300/20" />
-              <div className="h-20 w-[260px] max-w-sm animate-pulse rounded-md bg-gray-300/20" />
-              <div className="h-20 w-[260px] max-w-sm animate-pulse rounded-md bg-gray-300/20" />
-              <div className="h-20 w-[260px] max-w-sm animate-pulse rounded-md bg-gray-300/20" />
-              <div className="h-20 w-[260px] max-w-sm animate-pulse rounded-md bg-gray-300/20" />
-              <div className="h-20 w-[260px] max-w-sm animate-pulse rounded-md bg-gray-300/20" />
-            </>
+            // Skeleton loading state
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-20 w-full animate-pulse rounded-lg bg-white/5" />
+            ))
           )}
         </div>
       </div>
