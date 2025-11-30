@@ -144,10 +144,10 @@ const MCPSelector: React.FC<MCPSelectorProps> = ({
     try {
       const currentText = configText.trim();
       if (!currentText || currentText === '[]') return false;
-      
+
       const parsed = JSON.parse(currentText);
       if (!Array.isArray(parsed)) return false;
-      
+
       return parsed.some(server => server.name === presetName);
     } catch {
       return false;
@@ -158,7 +158,7 @@ const MCPSelector: React.FC<MCPSelectorProps> = ({
     console.log('🔍 DEBUG: togglePreset called with:', preset);
     console.log('🔍 DEBUG: Current configText:', configText);
     console.log('🔍 DEBUG: MCP enabled:', enabled);
-    
+
     const presets: Record<string, MCPConfig> = {
       github: {
         name: 'github',
@@ -215,15 +215,15 @@ const MCPSelector: React.FC<MCPSelectorProps> = ({
       const newText = JSON.stringify(currentConfig, null, 2);
       console.log('🔍 DEBUG: New config text:', newText);
       console.log('🔍 DEBUG: Final config array:', currentConfig);
-      
+
       setConfigText(newText);
-      
+
       // IMPORTANT: Also call onMCPChange immediately with the new config
       if (enabled) {
         console.log('🔍 DEBUG: Calling onMCPChange from togglePreset with:', { enabled, currentConfig });
         onMCPChange(enabled, currentConfig);
       }
-      
+
     } catch (error) {
       console.error('🔍 DEBUG: Error toggling preset:', error);
     }
@@ -360,7 +360,7 @@ const MCPSelector: React.FC<MCPSelectorProps> = ({
                 <i className="fas fa-times"></i>
               </button>
               <h3>Model Context Protocol (MCP)</h3>
-              <p>MCP enables GPT Researcher to connect with external tools and data sources through a standardized protocol.</p>
+              <p>MCP enables Researcher Agent to connect with external tools and data sources through a standardized protocol.</p>
 
               <h4 className="highlight">Benefits:</h4>
               <ul>
@@ -384,7 +384,7 @@ const MCPSelector: React.FC<MCPSelectorProps> = ({
                 <li><span className="highlight">name:</span> Unique identifier (e.g., &quot;github&quot;, &quot;filesystem&quot;)</li>
                 <li><span className="highlight">command:</span> Command to run the server (e.g., &quot;npx&quot;, &quot;python&quot;)</li>
                 <li><span className="highlight">args:</span> Array of arguments (e.g., [&quot;-y&quot;, &quot;@modelcontextprotocol/server-github&quot;])</li>
-                <li><span className="highlight">env:</span> Object with environment variables (e.g., {JSON.stringify({API_KEY: "your_key"})})</li>
+                <li><span className="highlight">env:</span> Object with environment variables (e.g., {JSON.stringify({ API_KEY: "your_key" })})</li>
               </ul>
             </div>
           </div>

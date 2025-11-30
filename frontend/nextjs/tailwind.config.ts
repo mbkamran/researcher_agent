@@ -11,56 +11,83 @@ const config: Config = {
       sm: '640px',
       md: '768px',
       lg: '898px',
-      // xl:"1024px"
+      xl: '1024px',
+      '2xl': '1280px',
     },
     container: {
       center: true,
+      padding: '2rem',
     },
     extend: {
-      animation: {
-        'gradient-x': 'gradient-x 10s ease infinite',
-        'shimmer': 'shimmer 2s linear infinite',
-        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'Inter', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'Fira Code', 'monospace'],
       },
-      keyframes: {
-        'gradient-x': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+      colors: {
+        background: '#05050A', // Deep space black
+        surface: '#0F111A', // Slightly lighter for cards
+        primary: {
+          DEFAULT: '#6366F1', // Indigo
+          hover: '#4F46E5',
+          glow: 'rgba(99, 102, 241, 0.5)',
         },
-        'shimmer': {
-          '100%': { transform: 'translateX(100%)' },
+        secondary: {
+          DEFAULT: '#EC4899', // Pink
+          hover: '#DB2777',
+          glow: 'rgba(236, 72, 153, 0.5)',
         },
+        accent: {
+          cyan: '#06B6D4',
+          purple: '#8B5CF6',
+          teal: '#14B8A6',
+        },
+        text: {
+          main: '#F8FAFC',
+          muted: '#94A3B8',
+          dim: '#475569',
+        },
+        border: {
+          subtle: 'rgba(255, 255, 255, 0.08)',
+          light: 'rgba(255, 255, 255, 0.15)',
+        }
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'custom-gradient':
-          'linear-gradient(150deg, #1B1B16 1.28%, #565646 90.75%)',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #9867F0, #ED4E50)',
-        'teal-gradient': 'linear-gradient(135deg, #0d9488, #0891b2, #2563eb)',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'hero-mesh': 'radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)',
+        'glass': 'linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+        'glass-hover': 'linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%)',
       },
       boxShadow: {
-        'glow': '0 0 40px rgba(152, 103, 240, 0.5)',
-        'teal-glow': '0 0 40px rgba(13, 148, 136, 0.5)',
+        'glow-sm': '0 0 10px rgba(99, 102, 241, 0.3)',
+        'glow-md': '0 0 20px rgba(99, 102, 241, 0.4)',
+        'glow-lg': '0 0 30px rgba(99, 102, 241, 0.5)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
       },
-      colors: {
-        'primary': {
-          '50': '#f0fdfa',
-          '100': '#ccfbf1',
-          '200': '#99f6e4',
-          '300': '#5eead4',
-          '400': '#2dd4bf',
-          '500': '#14b8a6',
-          '600': '#0d9488',
-          '700': '#0f766e',
-          '800': '#115e59',
-          '900': '#134e4a',
-          '950': '#042f2e',
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'shimmer': 'shimmer 2.5s linear infinite',
+        'spin-slow': 'spin 12s linear infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 10px rgba(99, 102, 241, 0.3)' },
+          '50%': { opacity: '0.8', boxShadow: '0 0 20px rgba(99, 102, 241, 0.6)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
         },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
 export default config;

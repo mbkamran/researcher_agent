@@ -45,7 +45,7 @@ const CopilotPanel: React.FC<CopilotPanelProps> = ({
 
   // Reference to the chat container
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  
+
   // Function to scroll to bottom
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
@@ -61,38 +61,38 @@ const CopilotPanel: React.FC<CopilotPanelProps> = ({
   // Also handle mutations in the DOM that might affect scroll height
   useEffect(() => {
     if (!chatContainerRef.current) return;
-    
+
     const observer = new MutationObserver(scrollToBottom);
-    
+
     observer.observe(chatContainerRef.current, {
       childList: true,
       subtree: true,
       characterData: true
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <>
       {/* Panel Header */}
-      <div className="flex justify-between items-center px-2 py-3 border-b border-gray-800/60 bg-gray-900/40">
+      <div className="flex justify-between items-center px-2 py-3 border-b border-matte-black-border bg-matte-black-surface/40">
         {/* Left side */}
         <div className="flex items-center">
           <a href="/" className="mr-3">
             <img
-              src="/img/gptr-logo.png"
+              src="/img/gptr-black-logo.png"
               alt="logo"
               width={32}
               height={32}
               className="rounded-md"
             />
           </a>
-          <h2 className="text-base font-medium text-gray-200">
-            GPT Researcher
+          <h2 className="text-base font-medium text-matte-black-text">
+            Researcher Agent
           </h2>
         </div>
-        
+
         {/* Right side */}
         <div className="flex items-center gap-3">
           {/* Connection status indicator */}
@@ -100,10 +100,10 @@ const CopilotPanel: React.FC<CopilotPanelProps> = ({
             <div className={`w-1.5 h-1.5 rounded-full ${loading || isProcessingChat ? 'bg-amber-500 animate-pulse' : 'bg-teal-500'} mr-2`}></div>
             <span className="text-xs text-gray-400">{loading ? 'researching' : isProcessingChat ? 'thinking' : 'active'}</span>
           </div>
-          
+
           {/* Toggle button */}
           {setIsCopilotVisible && (
-            <button 
+            <button
               onClick={(e) => {
                 e.preventDefault();
                 setIsCopilotVisible(false);
@@ -120,8 +120,8 @@ const CopilotPanel: React.FC<CopilotPanelProps> = ({
       </div>
 
       {/* Chat Messages - Scrollable */}
-      <div 
-        ref={chatContainerRef} 
+      <div
+        ref={chatContainerRef}
         className="flex-1 overflow-y-auto py-2 px-2 custom-scrollbar bg-gray-900/20"
       >
         {/* Status message - conditional on research state */}
