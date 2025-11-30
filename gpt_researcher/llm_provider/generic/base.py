@@ -280,9 +280,9 @@ class GenericLLMProvider:
         # Streaming the response using the chain astream method from langchain
         async for chunk in self.llm.astream(messages, **kwargs):
             content = chunk.content
-            if content is not None:
-                response += content
-                paragraph += content
+            if content:
+                response += content[0]["text"]
+                paragraph += content[0]["text"]
                 if "\n" in paragraph:
                     await self._send_output(paragraph, websocket)
                     paragraph = ""

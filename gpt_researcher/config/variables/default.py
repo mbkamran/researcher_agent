@@ -20,7 +20,7 @@ DEFAULT_CONFIG: BaseConfig = {
     "TOTAL_WORDS": 1200,
     "REPORT_FORMAT": "APA",
     "MAX_ITERATIONS": 3,
-    "AGENT_ROLE": None,
+    "AGENT_ROLE": "You are an expert research assistant.",
     "SCRAPER": "bs",
     "MAX_SCRAPER_WORKERS": 15,
     "SCRAPER_RATE_LIMIT_DELAY": 0.0,  # Minimum seconds between scraper requests (0 = no limit, useful for API rate limiting)
