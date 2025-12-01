@@ -75,6 +75,9 @@ export default function RootLayout({
         <ResearchHistoryProvider>
           {children}
         </ResearchHistoryProvider>
+        <footer className="w-full py-4 text-center text-xs text-white/30 border-t border-white/5 bg-background/80 backdrop-blur-sm z-50">
+          <p>This is only a prototype application.</p>
+        </footer>
       </body>
     </html>
   );
